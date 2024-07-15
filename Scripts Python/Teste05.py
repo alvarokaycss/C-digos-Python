@@ -1,0 +1,7 @@
+msg = input('Digite algo:')
+print('Qual a classe primitiva?', type(msg))
+print('É um número?', msg.isnumeric())
+print('É alfanúmerico?', msg.isalnum())
+print('É alfabético?',msg.isalpha())
+print('É decimal?',msg.isdecimal())
+print('Pode ser impresso?',msg.isprintable())

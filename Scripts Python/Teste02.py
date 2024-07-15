@@ -1,0 +1,6 @@
+nome = input('qual é seu nome?')
+idade = input('qual é sua idade')
+peso = input('qual é seu peso?')
+print('Então, sua idade é',idade, 'o seu nome é',nome, 'e você está atualmente pesando',peso,'?')
+input('sim') or input('não')
+print('Ok.')
