@@ -5,29 +5,31 @@ ato = False
 print('-='*15,'\n          JOGO DA VELHA\n','-='*15, '\n LINHAS: [1-2-3] COLUNAS: [1-2-3]\n' ,'-='*15)
 
 while ato == False:
-    linha_tab = -1
+    linha_tab = coluna = -1
 
 #IMPRIME O TABULEIRO:    
     for linha in tabuleiro:
         print(*linha, sep=' ')
-        
+
 #SOLICITA E VERIFICA AS ENTRADAS:    
-    while (linha_tab < 0 or linha_tab > 3):
+    while (linha_tab < 1 or linha_tab > 3) or (coluna < 1 or coluna > 3):
         try:
             linha_tab = int(input(f'Jogador {jogador}, escolha a LINHA onde deseja marcar [1-3]:'))
             coluna = int(input(f'Jogador {jogador}, escolha a COLUNA onde deseja marcar [1-3]:'))
-            if (linha_tab < 0 or linha_tab > 3):
+            if (linha_tab < 1 or linha_tab > 3) or (coluna < 1 or coluna > 3):
                 print('1- Insira posições válidas.')
+                continue
         except:
             print('2- Insira posições válidas.')
-            
+
 #ATUALIZA E VERIFICA O TABULEIRO:
+
     if tabuleiro[linha_tab-1][coluna-1] == '</>':
         tabuleiro[linha_tab-1][coluna-1] = jogador
-    else: #AQUI TROCAMOS O JOGADOR, POIS AO FINAL VAI SER TROCADO DENOVO PEDINDO NOVAMENTE A MESMA TENTATIVA!
+    else:
         print('Essa posição já está ocupada!')
-        jogador = '<O>' if jogador == '<X>' else '<X>'
-        
+        continue
+
 #FAZER VERIFICAÇÃO AQUI:
     ganhador = None
     for c in range(3):
@@ -36,7 +38,7 @@ while ato == False:
     for c in range(3):
         if (tabuleiro[0][c] == tabuleiro[1][c] == tabuleiro[2][c]) and tabuleiro[0][c] != '</>':
             ganhador = tabuleiro[0][c]
-            
+
 #VERIFICAÇÃO DA DIAGONAL:            
     if (tabuleiro[0][0] == tabuleiro [1][1] == tabuleiro [2][2]) and tabuleiro[0][0] != '</>':
         ganhador = tabuleiro[0][0]
@@ -47,9 +49,9 @@ while ato == False:
     if ganhador:
         ato = True
         for linha in tabuleiro:
-            print(f'{linha}\n')
+            print(*linha, sep=' ')
         print(f'O Jogador {jogador} venceu a partida!')
-        
+
 #VERIFICA SE HOUVE EMPATE:
     empate = 0
     for linha in tabuleiro:
@@ -59,10 +61,10 @@ while ato == False:
                 if empate == 9:
                     ato = True
                     for linha in tabuleiro:
-                        print(f'{linha}\n')
+                        print(*linha, sep=' ')
                     print('O jogo empatou! Tente Novamente.')
-        
+
 #TROCA A VEZ DO JOGADOR:        
     jogador = '<O>' if jogador == '<X>' else '<X>'
-    
+
 print('Obrigado por jogar!')
